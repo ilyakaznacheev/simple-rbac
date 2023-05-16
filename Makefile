@@ -11,9 +11,9 @@ generate/proto:
 		api/*.proto
 
 generate/docs:
-	@rm -rf ./api/doc && mkdir -p ./api/doc
+	@rm -rf ./docs/api*
 	@docker run --rm \
-      -v ${PWD}/api/doc:/out \
+      -v ${PWD}/docs:/out \
       -v ${PWD}/api:/protos \
       pseudomuto/protoc-gen-doc \
       --doc_opt=markdown,api.md

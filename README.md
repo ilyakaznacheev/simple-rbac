@@ -2,7 +2,7 @@
 
 This service illustrates a simplistic RBAC module implementation.
 
-[API Documentation](api/doc/api.md)
+[API Documentation](docs/api.md)
 
 ## Requirements
 
