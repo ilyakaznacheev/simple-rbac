@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = ".;auth";
+
+import "model.proto";
+import "google/protobuf/empty.proto";
+
+// Administrator API for role management.
+service RoleService {
+  // returns existing role
+  rpc GetRole(GetRoleRequest) returns(Role) {}
+  // creates a new role
+  rpc CreateRole(Role) returns(Role) {}
+  // updates existing role
+  rpc UpdateRole(Role) returns(Role) {}
+  // deletes existing role
+  rpc DeleteRole(DeleteRoleRequest) returns(google.protobuf.Empty) {}
+  // binds role to user in a scope of organization
+  rpc CreateRoleBinding(CreateRoleBindingRequest) returns(google.protobuf.Empty) {}
+  // unbinds role from user in all scopes
+  rpc DeleteRoleBinding(DeleteRoleBindingRequest) returns(google.protobuf.Empty) {}
+}
+
+message GetRoleRequest {
+  // id is the unique identifier of the role.
+  string id = 1;
+}
+
+message DeleteRoleRequest {
+  // id is the unique identifier of the role.
+  string id = 1;
+}
+
+message CreateRoleBindingRequest {
+  // role identifier
+  string role_id = 1;
+  // user identifier
+  string user_id = 2;
+  // organization identifier
+  string org_id = 3;
+}
+
+message DeleteRoleBindingRequest {
+  // role identifier
+  string role_id = 1;
+  // user identifier
+  string user_id = 2;
+}

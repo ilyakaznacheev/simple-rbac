@@ -14,20 +14,6 @@ type Repository struct {
 	mock.Mock
 }
 
-// CreateRoleBinding provides a mock function with given fields: ctx, binding
-func (_m *Repository) UpsertRoleBinding(ctx context.Context, binding model.RoleBinding) error {
-	ret := _m.Called(ctx, binding)
-
-	var r0 error
-	if rf, ok := ret.Get(0).(func(context.Context, model.RoleBinding) error); ok {
-		r0 = rf(ctx, binding)
-	} else {
-		r0 = ret.Error(0)
-	}
-
-	return r0
-}
-
 // DeleteRole provides a mock function with given fields: ctx, id
 func (_m *Repository) DeleteRole(ctx context.Context, id string) error {
 	ret := _m.Called(ctx, id)
@@ -57,14 +43,16 @@ func (_m *Repository) DeleteRoleBinding(ctx context.Context, userID string, role
 }
 
 // GetRole provides a mock function with given fields: ctx, id
-func (_m *Repository) GetRole(ctx context.Context, id string) (model.Role, error) {
+func (_m *Repository) GetRole(ctx context.Context, id string) (*model.Role, error) {
 	ret := _m.Called(ctx, id)
 
-	var r0 model.Role
-	if rf, ok := ret.Get(0).(func(context.Context, string) model.Role); ok {
+	var r0 *model.Role
+	if rf, ok := ret.Get(0).(func(context.Context, string) *model.Role); ok {
 		r0 = rf(ctx, id)
 	} else {
-		r0 = ret.Get(0).(model.Role)
+		if ret.Get(0) != nil {
+			r0 = ret.Get(0).(*model.Role)
+		}
 	}
 
 	var r1 error
@@ -107,6 +95,20 @@ func (_m *Repository) UpsertRole(ctx context.Context, role model.Role) error {
 	var r0 error
 	if rf, ok := ret.Get(0).(func(context.Context, model.Role) error); ok {
 		r0 = rf(ctx, role)
+	} else {
+		r0 = ret.Error(0)
+	}
+
+	return r0
+}
+
+// UpsertRoleBinding provides a mock function with given fields: ctx, binding
+func (_m *Repository) UpsertRoleBinding(ctx context.Context, binding model.RoleBinding) error {
+	ret := _m.Called(ctx, binding)
+
+	var r0 error
+	if rf, ok := ret.Get(0).(func(context.Context, model.RoleBinding) error); ok {
+		r0 = rf(ctx, binding)
 	} else {
 		r0 = ret.Error(0)
 	}

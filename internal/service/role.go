@@ -3,22 +3,37 @@ package service
 import (
 	"context"
 
+	"go.uber.org/zap"
+
 	"github.com/ilyakaznacheev/simple-rbac/internal/model"
 )
 
 // CreateRole creates a new role
 func (s *Service) CreateRole(ctx context.Context, role model.Role) error {
-	return s.repo.UpsertRole(ctx, role)
+	if err := s.repo.UpsertRole(ctx, role); err != nil {
+		zap.L().Error("failed to create role", zap.Error(err))
+		return err
+	}
+	return nil
 }
 
 // UpdateRole updates an existing role
 func (s *Service) UpdateRole(ctx context.Context, role model.Role) error {
-	return s.repo.UpsertRole(ctx, role)
+	if err := s.repo.UpsertRole(ctx, role); err != nil {
+		zap.L().Error("failed to update role", zap.Error(err))
+		return err
+	}
+	return nil
 }
 
 // GetRole returns a role by id
-func (s *Service) GetRole(ctx context.Context, id string) (model.Role, error) {
-	return s.repo.GetRole(ctx, id)
+func (s *Service) GetRole(ctx context.Context, id string) (*model.Role, error) {
+	r, err := s.repo.GetRole(ctx, id)
+	if err != nil {
+		zap.L().Error("failed to get role", zap.Error(err))
+		return nil, err
+	}
+	return r, nil
 }
 
 // DeleteRole deletes a role by id

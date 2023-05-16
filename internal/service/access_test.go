@@ -26,7 +26,6 @@ func TestService_CheckAuthority(t *testing.T) {
 		name    string
 		args    args
 		mock    mockArgs
-		want    bool
 		wantErr bool
 	}{
 		{
@@ -40,7 +39,6 @@ func TestService_CheckAuthority(t *testing.T) {
 				permissions: []model.Permission{model.PermManageUsers, model.PermManageEnvironments},
 				err:         nil,
 			},
-			want:    true,
 			wantErr: false,
 		},
 		{
@@ -54,8 +52,7 @@ func TestService_CheckAuthority(t *testing.T) {
 				permissions: []model.Permission{model.PermModifyLogs, model.PermManageEnvironments},
 				err:         nil,
 			},
-			want:    false,
-			wantErr: false,
+			wantErr: true,
 		},
 		{
 			name: "error",
@@ -68,7 +65,6 @@ func TestService_CheckAuthority(t *testing.T) {
 				permissions: nil,
 				err:         fmt.Errorf("some error"),
 			},
-			want:    false,
 			wantErr: true,
 		},
 	}
@@ -81,13 +77,10 @@ func TestService_CheckAuthority(t *testing.T) {
 			s := &Service{
 				repo: r,
 			}
-			got, err := s.CheckAuthority(context.Background(), tt.args.userID, tt.args.organizationID, tt.args.permission)
+			err := s.CheckAuthority(context.Background(), tt.args.userID, tt.args.organizationID, tt.args.permission)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("CheckAuthority() error = %v, wantErr %v", err, tt.wantErr)
 				return
-			}
-			if got != tt.want {
-				t.Errorf("CheckAuthority() got = %v, want %v", got, tt.want)
 			}
 		})
 	}

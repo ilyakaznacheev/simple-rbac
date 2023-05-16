@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = ".;auth";
+
+message Action {
+  // user identifier
+  string user_id = 1;
+  // organization identifier
+  string org_id = 2;
+  // permission to check
+  Permission permission = 3;
+}
+
+message Role {
+  // role identifier
+  string role_id = 1;
+  // list of permissions
+  repeated Permission permissions = 2;
+}
+
+enum Permission {
+  PERM_NOOP = 0; // Indicates no value, will lead to an error if set
+  PERM_MANAGE_USERS = 1;  // Add or remove other users to an organization
+  PERM_MODIFY_USER_PERMISSIONS = 2; // Modify a user’s permission in an organization
+  PERM_CREATE_PROJECT = 3;  // Create a new project in an organization
+  PERM_DELETE_PROJECT = 4;  // Remove a project from an organization
+  PERM_DEPLOY_PROJECT = 5;  // Deploy a project to a specific environment
+  PERM_MANAGE_ENVIRONMENTS = 6; // Modify environments definitions for a project
+  PERM_READ_LOGS = 7; // Read logs for a project
+  PERM_MODIFY_LOGS = 8; // Edit logs for a project
+  PERM_AUDIT_LOGS = 9;  // Audit logs and sensitive data for a project
+}

@@ -293,7 +293,7 @@ func TestService_GetRole(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			r := new(mocks.Repository)
 			r.On("GetRole", mock.Anything, tt.args.roleID).
-				Once().Return(tt.mock.role, tt.mock.err)
+				Once().Return(&tt.mock.role, tt.mock.err)
 
 			s := &Service{
 				repo: r,
@@ -303,7 +303,7 @@ func TestService_GetRole(t *testing.T) {
 				t.Errorf("GetRole() error = %v, wantErr %v", err, tt.wantErr)
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if err == nil && !reflect.DeepEqual(*got, tt.want) {
 				t.Errorf("GetRole() got = %v, want %v", got, tt.want)
 			}
 		})

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = ".;auth";
+
+import "model.proto";
+import "google/protobuf/empty.proto";
+
+// Authorization API for public use
+service AuthorityService {
+  // AuthorizeAction checks if the user is authorized to perform the action
+  rpc AuthorizeAction(Action) returns(google.protobuf.Empty) {}
+}
