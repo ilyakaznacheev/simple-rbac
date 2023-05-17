@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"net"
 
-	"go.uber.org/zap"
 	"google.golang.org/grpc"
 
 	"github.com/ilyakaznacheev/simple-rbac/api/auth-go"
@@ -42,8 +41,6 @@ func New(app Application) *Server {
 }
 
 func (s *Server) Serve(address string) error {
-	zap.L().Info("starting query server", zap.String("address", address))
-
 	lst, err := net.Listen("tcp", address)
 	if err != nil {
 		return fmt.Errorf("listen port for GRPC server: %w", err)

@@ -30,6 +30,7 @@ type Storage struct {
 	roles userRoles
 }
 
+// New creates a new instance of the Storage.
 func New() *Storage {
 	return &Storage{
 		perms:    make(userPerm),

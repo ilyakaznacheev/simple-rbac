@@ -19,3 +19,6 @@ generate/docs:
       --doc_opt=markdown,api.md
 
 generate/api: generate/proto generate/docs
+
+run:
+	@go run cmd/*.go

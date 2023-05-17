@@ -6,6 +6,7 @@ import (
 	"github.com/ilyakaznacheev/simple-rbac/internal/model"
 )
 
+// Repository is a storage layer for the RBAC system.
 type Repository interface {
 	GetUserPermissionsByOrg(ctx context.Context, userID, organizationID string) ([]model.Permission, error)
 	UpsertRole(ctx context.Context, role model.Role) error
@@ -16,6 +17,12 @@ type Repository interface {
 	//ListUserRoles(ctx context.Context, userID string) ([]model.Role, error)
 }
 
+// Service is a business logic layer for the RBAC system.
 type Service struct {
 	repo Repository
+}
+
+// New creates a new instance of the Service.
+func New(repo Repository) *Service {
+	return &Service{repo: repo}
 }
