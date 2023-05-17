@@ -10,7 +10,7 @@ This service illustrates a simplistic RBAC module implementation.
 
 To develop application you need to install:
 
-- [Go 1.18+](https://go.dev/dl/)
+- [Go 1.19+](https://go.dev/dl/)
 - [Docker](https://docs.docker.com/engine/install/)
 - [mockery](https://github.com/vektra/mockery)
 - [protoc](https://grpc.io/docs/protoc-installation/) with [go plugins](https://grpc.io/docs/languages/go/quickstart/)
