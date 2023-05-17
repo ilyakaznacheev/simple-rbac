@@ -2,6 +2,10 @@
 
 This service illustrates a simplistic RBAC module implementation.
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/ilyakaznacheev/simple-rbac)](https://goreportcard.com/report/github.com/ilyakaznacheev/simple-rbac)
+[![Coverage Status](https://codecov.io/github/ilyakaznacheev/simple-rbac/coverage.svg?branch=master)](https://codecov.io/gh/ilyakaznacheev/simple-rbac)
+[![License](https://img.shields.io/github/license/ilyakaznacheev/simple-rbac.svg)](https://github.com/ilyakaznacheev/simple-rbac/blob/master/LICENSE)
+
 [API Documentation](docs/api.md)
 
 ## Requirements
