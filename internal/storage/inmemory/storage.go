@@ -3,6 +3,7 @@ package inmemory
 import (
 	"context"
 	"fmt"
+	"sort"
 
 	"github.com/ilyakaznacheev/simple-rbac/internal/model"
 )
@@ -139,6 +140,10 @@ func toSlice(p map[model.Permission]struct{}) []model.Permission {
 	for perm := range p {
 		res = append(res, perm)
 	}
+	// sort permissions to make the order deterministic
+	sort.Slice(res, func(i, j int) bool {
+		return res[i] < res[j]
+	})
 	return res
 }
 
