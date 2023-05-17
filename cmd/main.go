@@ -16,14 +16,19 @@ import (
 )
 
 var (
-	port = flag.String("port", "8080", "gRPC port")
+	port      = flag.String("port", "8080", "gRPC port")
+	printHelp = flag.Bool("h", false, "Print help and exit")
 )
 
 func main() {
+	flag.Parse()
+	if *printHelp {
+		flag.Usage()
+		os.Exit(0)
+	}
+
 	l, _ := zap.NewProduction()
 	zap.ReplaceGlobals(l)
-
-	flag.Parse()
 
 	s := inmemory.New()
 
